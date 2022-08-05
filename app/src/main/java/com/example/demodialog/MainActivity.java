@@ -3,12 +3,14 @@ package com.example.demodialog;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnEX3;
     TextView tvDemo2;
     TextView tvDemo3;
+    TextView tvDemo4;
     TextView Ex3;
 
 
@@ -154,6 +157,23 @@ public class MainActivity extends AppCompatActivity {
                 myBuilder.setNegativeButton("CANCEL", null);
                 AlertDialog myDialog = myBuilder.create();
                 myDialog.show();
+            }
+        });
+
+        btnDemo4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                        tvDemo4.setText("Date: " + dayOfMonth + "/" + (monthOfYear+1) + "/" + year);
+                    }
+                };
+
+                DatePickerDialog myDateDialog = new DatePickerDialog(MainActivity.this,
+                        myDateListener,2014,11,31);
+                myDateDialog.show();
             }
         });
     }
