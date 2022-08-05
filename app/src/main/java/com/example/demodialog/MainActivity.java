@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnDemo1;
     Button btnDemo2;
     Button btnDemo3;
+    Button btnDemo4;
     Button btnEX3;
     TextView tvDemo2;
     TextView tvDemo3;
@@ -155,6 +156,5 @@ public class MainActivity extends AppCompatActivity {
                 myDialog.show();
             }
         });
-
     }
 }
