@@ -17,9 +17,11 @@ public class MainActivity extends AppCompatActivity {
     Button btnDemo1;
     Button btnDemo2;
     Button btnDemo3;
+    Button btnEX3;
     TextView tvDemo2;
     TextView tvDemo3;
-    EditText etDemo3;
+    TextView Ex3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         tvDemo2 = findViewById(R.id.textView);
         btnDemo3 = findViewById(R.id.button3);
         tvDemo3 = findViewById(R.id.textView2);
+        btnEX3 = findViewById(R.id.button4);
 
 
         btnDemo1.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +109,45 @@ public class MainActivity extends AppCompatActivity {
                         String message = etInput.getText().toString();
                         // Set the text to the TextView
                         tvDemo3.setText(message);
+                    }
+                });
+                myBuilder.setNegativeButton("CANCEL", null);
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
+            }
+        });
+
+        btnEX3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Inflate the input.xml layout file
+                LayoutInflater inflater =
+                        (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View viewDialog = inflater.inflate(R.layout.ex3, null);
+
+                // Obtain the UI component in the input.xml layout
+                // It needs to be defined as "final", so that it can used in the onClick() method later
+                final EditText etInput1 = viewDialog.findViewById(R.id.editView2);
+                final EditText etInput2 = viewDialog.findViewById(R.id.editView3);
+
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(MainActivity.this);
+                myBuilder.setView(viewDialog);  // Set the view of the dialog
+                myBuilder.setTitle("Exercise 3");
+                myBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Extract the text entered by the user
+                        String message1 = etInput1.getText().toString();
+                        String message2 = etInput2.getText().toString();
+
+                        //Change them to int
+                         int number1 = Integer.parseInt(message1);
+                         int number2 = Integer.parseInt(message2);
+
+                         int results = number1 + number2;
+                        // Set the text to the TextView
+                        String message = "The sum is " + results;
+                        Ex3.setText(message);
                     }
                 });
                 myBuilder.setNegativeButton("CANCEL", null);
