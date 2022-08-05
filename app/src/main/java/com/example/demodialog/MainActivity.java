@@ -14,12 +14,15 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btnDemo1;
     Button btnDemo2;
     Button btnDemo3;
     Button btnDemo4;
+    Button btnDemo5;
     Button btnEX3;
     TextView tvDemo2;
     TextView tvDemo3;
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         btnDemo2 = findViewById(R.id.button2);
         tvDemo2 = findViewById(R.id.textView);
         btnDemo3 = findViewById(R.id.button3);
+        btnDemo4 = findViewById(R.id.button5);
+        btnDemo5 = findViewById(R.id.button6);
         tvDemo3 = findViewById(R.id.textView2);
         btnEX3 = findViewById(R.id.button4);
 
@@ -170,6 +175,11 @@ public class MainActivity extends AppCompatActivity {
                         tvDemo4.setText("Date: " + dayOfMonth + "/" + (monthOfYear+1) + "/" + year);
                     }
                 };
+                // Create the Date Picker Dialog to show the current date when it first appears
+                Calendar now = Calendar.getInstance();
+                int year = now.get(Calendar.YEAR);
+                int month = now.get(Calendar.MONTH);
+                int day = now.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog myDateDialog = new DatePickerDialog(MainActivity.this,
                         myDateListener,2014,11,31);
