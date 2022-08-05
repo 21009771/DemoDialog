@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.util.Calendar;
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvDemo2;
     TextView tvDemo3;
     TextView tvDemo4;
+    TextView tvDemo5;
     TextView Ex3;
 
 
@@ -38,10 +41,12 @@ public class MainActivity extends AppCompatActivity {
         btnDemo1 = findViewById(R.id.button);
         btnDemo2 = findViewById(R.id.button2);
         tvDemo2 = findViewById(R.id.textView);
+        tvDemo3 = findViewById(R.id.textView2);
+        tvDemo4 = findViewById(R.id.editView3);
+        tvDemo5 = findViewById(R.id.textView5);
         btnDemo3 = findViewById(R.id.button3);
         btnDemo4 = findViewById(R.id.button5);
         btnDemo5 = findViewById(R.id.button6);
-        tvDemo3 = findViewById(R.id.textView2);
         btnEX3 = findViewById(R.id.button4);
 
 
@@ -184,6 +189,30 @@ public class MainActivity extends AppCompatActivity {
                 DatePickerDialog myDateDialog = new DatePickerDialog(MainActivity.this,
                         myDateListener,2014,11,31);
                 myDateDialog.show();
+            }
+        });
+
+        btnDemo5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimePickerDialog.OnTimeSetListener myTimeListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        tvDemo5.setText("Time: " + hourOfDay + ":" + minute);
+
+                    }
+                };
+
+                // Create the Date Picker Dialog to show the current date when it first appears
+                Calendar now = Calendar.getInstance();
+                int hourOfDay = now.get(Calendar.HOUR_OF_DAY);  // Current Hour
+                int minute = now.get(Calendar.MINUTE);  // Current Minute
+
+
+                TimePickerDialog myTimeDialog = new TimePickerDialog(MainActivity.this,
+                        myTimeListener, 20, 00, true);
+
+                myTimeDialog.show();
             }
         });
     }
