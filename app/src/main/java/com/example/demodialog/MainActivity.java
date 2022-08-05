@@ -3,17 +3,23 @@ package com.example.demodialog;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btnDemo1;
     Button btnDemo2;
+    Button btnDemo3;
     TextView tvDemo2;
+    TextView tvDemo3;
+    EditText etDemo3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         btnDemo1 = findViewById(R.id.button);
         btnDemo2 = findViewById(R.id.button2);
         tvDemo2 = findViewById(R.id.textView);
+        btnDemo3 = findViewById(R.id.button3);
+        tvDemo3 = findViewById(R.id.textView2);
+
 
         btnDemo1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +65,13 @@ public class MainActivity extends AppCompatActivity {
                 myBuilder.setTitle("Demo 2 Buttons Dialog");
                 myBuilder.setMessage("Select one of the Buttons below.");
                 myBuilder.setCancelable(false);
-                myBuilder.setPositiveButton("Positive", new DialogInterface.OnClickListener() {
+                myBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        tvDemo2.setText("You have selected Negative.");
+                    }
+                });
+                myBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         tvDemo2.setText("You have selected Positive.");
@@ -68,5 +83,36 @@ public class MainActivity extends AppCompatActivity {
                 MyDialog.show();
             }
         });
+
+        btnDemo3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Inflate the input.xml layout file
+                LayoutInflater inflater =
+                        (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View viewDialog = inflater.inflate(R.layout.input, null);
+
+                // Obtain the UI component in the input.xml layout
+                // It needs to be defined as "final", so that it can used in the onClick() method later
+                final EditText etInput = viewDialog.findViewById(R.id.editView);
+
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(MainActivity.this);
+                myBuilder.setView(viewDialog);  // Set the view of the dialog
+                myBuilder.setTitle("Demo 3-Text Input Dialog");
+                myBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Extract the text entered by the user
+                        String message = etInput.getText().toString();
+                        // Set the text to the TextView
+                        tvDemo3.setText(message);
+                    }
+                });
+                myBuilder.setNegativeButton("CANCEL", null);
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
+            }
+        });
+
     }
 }
